@@ -3,11 +3,17 @@ import argparse
 import time
 
 # Set up the MAVLink connection
-connection_string = 'udp:127.0.0.1:14550'  # Replace with your connection string
-mav = mavutil.mavlink_connection(connection_string)
+connection_string = 'tcp:127.0.0.1:5760'  # Replace with your connection string
 
-# Wait for a heartbeat to ensure connection is established
-mav.wait_heartbeat()
+# Wait for a connection to be established
+while True:
+    try:
+        mav = mavutil.mavlink_connection(connection_string)
+        mav.wait_heartbeat()
+        break
+    except:
+        print("Waiting for connection...")
+        time.sleep(1)
 
 # Get autopilot version and hardware IDs
 version = mav.mav.version
@@ -74,5 +80,4 @@ while True:
 
                 time.sleep(15)
 
-        # Clear the command argument
-        args.command = None
+        #
