@@ -3,7 +3,7 @@ import argparse
 import time
 
 # Set up the MAVLink connection
-connection_string = 'tcp:127.0.0.1:5760'  # Replace with your connection string
+connection_string = 'udp:127.0.0.1:5760'  # Replace with your connection string
 
 # Wait for a connection to be established
 while True:
